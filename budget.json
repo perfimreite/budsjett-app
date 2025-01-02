@@ -1,0 +1,18 @@
+{
+    "budget": 
+    {
+        "unit": "kroner",
+        "expenses": 
+        {
+            "mat": 2000,
+            "fritid": 800,
+            "bolig": 8000,
+            "transport": 1200,
+            "helse": 1000,
+            "sparing": 3000,
+            "total": 16000 
+        }
+    }
+}
+
+

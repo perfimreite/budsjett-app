@@ -1,0 +1,21 @@
+{
+    "history": {
+        "unit": "kroner",
+        "expenses": {
+            "mat": [
+            ],
+            "fritid": [
+            ],
+            "bolig": [
+            ],
+            "transport": [
+            ],
+            "helse": [
+            ],
+            "sparing": [
+            ],
+            "total": [
+            ]
+        }
+    }
+}
