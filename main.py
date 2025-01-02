@@ -38,7 +38,7 @@ def store_data(expenses):
 
 
 # find the differences between his bugdet and actual purchases for the month 
-def compare_with_budget(expenses, expected_expenses):
+def compare_with_budget(expense_areas, expected_expenses, expenses):
     delta = 0
     total = 0
     deltas = []
@@ -102,7 +102,7 @@ def get_user_average():
 
 
 # make the graphs and give the user feedback on his latest month
-def give_feedback(eval):
+def give_feedback(eval, expense_areas, expected_expenses, expenses):
     # feedback
     print(f"RESULT: {eval}")
    
@@ -141,8 +141,6 @@ def handle_data():
 # execute  program
 expense_areas, expected_expenses = handle_data()
 expenses = get_user_expenses()
-result = compare_with_budget(expenses, expected_expenses)
+result = compare_with_budget(expense_areas, expected_expenses, expenses)
 eval = review_result(result)
-feedback = give_feedback(eval)
-
-print(feedback)
+feedback = give_feedback(eval, expense_areas, expected_expenses, expenses)
