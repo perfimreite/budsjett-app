@@ -3,8 +3,25 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+# read data from the budget and sort it into lists
+def get_budget():
+    path = "./budget.json"
+
+    with open(path, "r", encoding="utf-8") as file:
+        budget = json.load(file)
+        currency = budget["budget"]["unit"]
+        expense_areas = []
+        expected_expenses = []
+
+    for k, v in budget["budget"]["expenses"].items():
+        expense_areas.append(k)    
+        expected_expenses.append(v)    
+        
+    return [expense_areas, expected_expenses]
+
+
 # goes through the different expense areas and takes the get user input for each
-def get_user_expenses():
+def get_user_expenses(expense_areas):
     expenses = []
 
     for i in range(len(expense_areas) - 1):
@@ -65,10 +82,7 @@ def compare_with_budget(expense_areas, expected_expenses, expenses):
 
 
 # look at how much he spent compared to his budget and give feedback accordingly
-def review_result(result):
-    delta = result[0]
-    biggest_spend = result[1]
-    total = result[2]
+def review_result(expenses, delta, biggest_spend, total):
     expenses.append(total)
 
     if delta == 0:
@@ -103,10 +117,8 @@ def get_user_average():
 
 # make the graphs and give the user feedback on his latest month
 def give_feedback(eval, expense_areas, expected_expenses, expenses):
-    # feedback
     print(f"RESULT: {eval}")
    
-    # graph
     average = get_user_average()
     x = np.arange(len(expense_areas))
     WIDTH = 0.30
@@ -121,26 +133,17 @@ def give_feedback(eval, expense_areas, expected_expenses, expenses):
     plt.show()
     
 
-# read data from the budget and sort it into lists
-def handle_data():
-    path = "./budget.json"
-
-    with open(path, "r", encoding="utf-8") as file:
-        budget = json.load(file)
-        currency = budget["budget"]["unit"]
-        expense_areas = []
-        expected_expenses = []
-
-    for k, v in budget["budget"]["expenses"].items():
-        expense_areas.append(k)    
-        expected_expenses.append(v)    
-        
-    return [expense_areas, expected_expenses]
+# entrypoint
+def main():
+    expense_areas, expected_expenses = get_budget()
+    expenses = get_user_expenses(expense_areas)
+    delta, biggest_spend, total = compare_with_budget(expense_areas, expected_expenses, expenses)
+    eval = review_result(expenses, delta, biggest_spend, total)
+    feedback = give_feedback(eval, expense_areas, expected_expenses, expenses)
 
 
-# execute  program
-expense_areas, expected_expenses = handle_data()
-expenses = get_user_expenses()
-result = compare_with_budget(expense_areas, expected_expenses, expenses)
-eval = review_result(result)
-feedback = give_feedback(eval, expense_areas, expected_expenses, expenses)
+# execute program
+if __name__== "__main__":
+    main()
+    
+    
