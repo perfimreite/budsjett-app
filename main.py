@@ -26,7 +26,8 @@ def get_user_expenses(expense_areas):
 
     for i in range(len(expense_areas) - 1):
         question = f"Kor mykje har du brukt på {expense_areas[i]} denne månaden: "
-        expenses.append(int(input(question)))
+        expense = int(input(question))
+        expenses.append(expense)
 
     store_data(expenses)
 
@@ -145,5 +146,3 @@ def main():
 # execute program
 if __name__== "__main__":
     main()
-    
-    
